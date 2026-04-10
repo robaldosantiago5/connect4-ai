@@ -13,7 +13,7 @@ Board::Board()
 // ── Static helpers ────────────────────────────────────────────────────────────
 
 uint64_t Board::topMask(int col) {
-    // The top row bit of column col is at row ROWS-1.
+    // Highest valid row in column col is row ROWS-1 (the sentinel is at ROWS).
     return 1ULL << bitIndex(col, ROWS - 1);
 }
 

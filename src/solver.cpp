@@ -243,9 +243,9 @@ int Solver::bestMove(Board& board) {
 
     // ── 3. Choose search strategy based on game phase ─────────────────────────
     // For early positions (many remaining moves), a full exact search is very
-    // expensive.  Use a deep heuristic search (depth 16) instead.
-    // The exact solver kicks in from move 14 onwards (~28 remaining), where it
-    // consistently completes in under 3 seconds.
+    // expensive.  Use a deep heuristic search (depth 14) instead.
+    // The exact solver kicks in from move 15 onwards (14 moves played, 28 remaining),
+    // where it consistently completes in under 3 seconds.
     const int remaining = COLS * ROWS - board.getMoveCount();
     const bool useExact = (remaining <= 28);
 
@@ -266,8 +266,8 @@ int Solver::bestMove(Board& board) {
         if (useExact) {
             score = -solve(board);
         } else {
-            // Depth-14 bounded search: handles up to 7 full plies per side,
-            // which covers all short-term tactics and threats.
+            // Depth-14 bounded search: covers 14 plies (half-moves) total,
+            // which handles all short-term tactics and threats.
             score = -negamaxBounded(board, -MAX_SCORE, MAX_SCORE, 14);
         }
         board.undo();
