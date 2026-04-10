@@ -1,0 +1,8 @@
+# Build output
+connect4
+*.o
+
+# Editor / OS artifacts
+.DS_Store
+*.swp
+*~
